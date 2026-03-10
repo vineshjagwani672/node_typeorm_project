@@ -10,6 +10,6 @@ AppDataSource.initialize()
   .catch((err) => console.log("DB error:", err));
 
 app.use("/", userRoutes);
-
+sfsdfs
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
