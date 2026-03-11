@@ -1,4 +1,5 @@
-const AppDataSource = require("../config/db");
+// controllers/userController.js
+const { AppDataSource } = require("../config/data-source");
 const User = require("../models/User");
 
 exports.getUsers = async (req, res) => {
@@ -12,9 +13,13 @@ exports.getUsers = async (req, res) => {
 
 exports.addUser = async (req, res) => {
   try {
-    const user = AppDataSource.getRepository(User).create(req.body);
-    await AppDataSource.getRepository(User).save(user);
-    res.json({ message: "User created", user });
+    const { name, email, password } = req.body;
+    const userRepo = AppDataSource.getRepository(User);
+
+    const user = userRepo.create({ name, email, password });
+    await userRepo.save(user);
+
+    res.status(201).json({ message: "User created", user });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
