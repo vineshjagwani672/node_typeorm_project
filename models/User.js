@@ -1,22 +1,30 @@
+// models/User.js
 const { EntitySchema } = require("typeorm");
 
-module.exports = new EntitySchema({
+const User = new EntitySchema({
   name: "User",
   tableName: "users",
   columns: {
     id: {
-      type: Number,
+      type: "int",
       primary: true,
-      generated: true
+      generated: true,
     },
-    first_name: { type: String, nullable: false },
-    last_name: { type: String, nullable: false },
-    user_name: { type: String, nullable: false, unique: true },
-    email: { type: String, nullable: false, unique: true },
-    password: { type: String, nullable: false },
-    phone: { type: String, nullable: true },
-    city: { type: String, nullable: true },
-    country: { type: String, nullable: true },
-    age: { type: Number, nullable: true }
-  }
+    name: {
+      type: "varchar",
+    },
+    email: {
+      type: "varchar",
+      unique: true,
+    },
+    password: {
+      type: "varchar",
+    },
+    created_at: {
+      type: "timestamp",
+      createDate: true,
+    },
+  },
 });
+
+module.exports = User; // no curly braces
